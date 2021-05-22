@@ -59,7 +59,7 @@ def crawl(dirpath, batch_size = 8000)
     current_dir = directories[crawled_dirs_count]
 
     # TODO: Include more dirs to skip/ignore from config
-    if current_dir.endswith?("/.glusterfs")
+    if current_dir.to_s.ends_with?("/.glusterfs")
       crawled_dirs_count += 1
       next
     end

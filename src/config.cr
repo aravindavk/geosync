@@ -12,7 +12,8 @@ struct Config
     ssh_port = 22,
     ssh_command = "ssh",
     rsync_command = "rsync",
-    syncjobs = 4
+    syncjobs = 4,
+    syncmode = "auto" # Available choices: auto, crawl
 
   def target_node
     target_node, _, _ = @target.rpartition(":")
