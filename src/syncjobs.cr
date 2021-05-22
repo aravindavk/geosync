@@ -82,15 +82,15 @@ class SyncJobs
   def rsync_job
     cmd = "rsync"
     args = [
-      "-0",                    # Use \x00 delimiter for the files list
-      "--stats",               # Include rsync stats
-      "--files-from=-",        # Files from Stdin
-      "--delete-missing-args", # If file deleted in Primary, then try to delete in Target
-      "--ignore-missing-args", # If file is already deleted in Secondary then don't worry
-      "-H",                    # Preserve Hardlinks
-      "-e", rsync_ssh_opts,    # SSH Control Master and Port options
-      @confmgr.config.src,     # Source Path
-      @confmgr.config.target,  # Target Path (HOST:PATH format)
+      "-0",                       # Use \x00 delimiter for the files list
+      "--stats",                  # Include rsync stats
+      "--files-from=-",           # Files from Stdin
+      "--delete-missing-args",    # If file deleted in Primary, then try to delete in Target
+      "--ignore-missing-args",    # If file is already deleted in Secondary then don't worry
+      "-H",                       # Preserve Hardlinks
+      "-e", rsync_ssh_opts,       # SSH Control Master and Port options
+      @confmgr.config.source_dir, # Source Path
+      @confmgr.config.target,     # Target Path (HOST:PATH format)
     ]
     stdout = IO::Memory.new
     stderr = IO::Memory.new

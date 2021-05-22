@@ -5,7 +5,7 @@ struct Config
   include YAML::Serializable
   include JSON::Serializable
 
-  property src = "",
+  property source_dir = "",
     target = "",
     crawl_dir = "",
     stime_xattr = "",
@@ -20,9 +20,9 @@ struct Config
     target_node
   end
 
-  def target_path
-    _, _, target_path = @target.rpartition(":")
-    target_path
+  def target_dir
+    _, _, target_dir = @target.rpartition(":")
+    target_dir
   end
 
   def ssh_ctrl_path
@@ -37,7 +37,7 @@ end
 # config_mgr = ConfigManager.new("sample_config.yaml")
 # puts config_mgr.config
 # puts config_mgr.config.target_node
-# puts config_mgr.config.target_path
+# puts config_mgr.config.target_dir
 # puts config_mgr.config.ssh_ctrl_path
 # ```
 class ConfigManager

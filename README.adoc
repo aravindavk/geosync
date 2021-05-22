@@ -6,3 +6,40 @@ Current GlusterFS Geo-replication is GFID based, that means the file in Secondar
 * **Rsync --inplace option** Normally rsync creates a temporary file and then it renames to final file name to prevent corruption and also for data availability for reading. But creating new file means changing the GFID. So existing Geo-replication uses `--inplace` option to prevent the same.
 * **Multiple Revisions** If a file is created, deleted and then created again(Example: Log rotate), then same steps should be replayed on Secondary state to get the same GFID.
 * **No support for non GlusterFS targets** Because of the GFID dependency, Geo-replication can't be setup for non GlusterFS volume targets.
+
+
+== Design
+
+TODO
+
+== Usage
+
+Create the config file as
+
+[source,yaml]
+----
+# filename: config.yaml
+source_dir: /mnt/gvol1
+target: server1.kadalu:/mnt/gvol2
+crawl_dir: /bricks/gvol1/brick1/brick
+stime_xattr: 53d458aa-075c-4a3c-8d69-62ac4802d41b.stime
+----
+
+Where
+
+* `source_dir` is path of Primary Volume mount
+* `target` is the hostname and target directory details. `<secondary-node>:<secondary-volume-mount>` format
+* `crawl_dir` is the Brick root from where Crawl is done.
+* `stime_xattr` is the name of the xattr to be maintained to record the synced time. Ideally `<secondary-vol-id>.stime`
+
+Now run the Geosync,
+
+[source,console]
+----
+# mkdir -p /root/.ssh/controlmasters
+# ssh-keygen
+# # ssh-copy-id <secondary-hostname>, for example
+# ssh-copy-id root@server1.kadalu
+# ./geosync config.yaml
+----
+

@@ -1,0 +1,4 @@
+src: /mnt/gvol1
+target: server1.kadalu:/mnt/gvol2
+crawl_dir: /bricks/gvol1/brick1/brick
+stime_xattr: 53d458aa-075c-4a3c-8d69-62ac4802d41b.stime
