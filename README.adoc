@@ -1,0 +1,8 @@
+= GeoSync - Path based GlusterFS Geo-replication
+
+Current GlusterFS Geo-replication is GFID based, that means the file in Secondary site will have same GFID of the file exists in Primary Volume. This approach introduces the following issues.
+
+* **Two Step operations** Entry operations and data sync operations are different, Entry operations are done using `RPC` and then data synced using `rsync`.
+* **Rsync --inplace option** Normally rsync creates a temporary file and then it renames to final file name to prevent corruption and also for data availability for reading. But creating new file means changing the GFID. So existing Geo-replication uses `--inplace` option to prevent the same.
+* **Multiple Revisions** If a file is created, deleted and then created again(Example: Log rotate), then same steps should be replayed on Secondary state to get the same GFID.
+* **No support for non GlusterFS targets** Because of the GFID dependency, Geo-replication can't be setup for non GlusterFS volume targets.
