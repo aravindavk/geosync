@@ -1,0 +1,24 @@
+name: geosync
+version: 0.1.0
+
+authors:
+  - Kadalu.io <engineering@kadalu.io>
+
+description: |
+  Kadalu Storage and GlusterFS Geo synchronization tool
+
+license: Apache-2.0
+
+targets:
+  geosync:
+    main: src/geosync.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    commit: 6e72ebb447caa29e9868af546d1d0b2343a68553
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.13.0
